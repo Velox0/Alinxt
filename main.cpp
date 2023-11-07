@@ -5,7 +5,6 @@
 #include <unistd.h>
 
 unsigned int max_length = 0;
-unsigned int str_length = 0;
 unsigned int lines = 1;
 
 /*
@@ -14,6 +13,7 @@ unsigned int lines = 1;
     Until encounters '\0'.
 */
 void scanarg(const char *str) {
+  unsigned int str_length = 0;
   for (int i = 0; *(str + i) != '\0'; i++) {
     // count non-new-line characters
     if (*(str + i) != '\n')
@@ -38,6 +38,7 @@ void spacer(int width) {
 }
 
 int main(int argc, char **argv) {
+  lines += argc - 2;
 
   // Get terminal dimensions
   struct winsize w;
@@ -61,10 +62,12 @@ int main(int argc, char **argv) {
         if (*(*(argv + i) + j) == '\n')
           spacer(width);
       }
+      std::cout << std::endl;
+      spacer(width);
     }
   }
 
-  for (int i = 0; i < (height - lines) / 2; i++)
+  for (int i = 2; i < (height - lines) / 2; i++)
     std::cout << '\n';
 
   return EXIT_SUCCESS;
