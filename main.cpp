@@ -54,8 +54,9 @@ int main(int argc, char **argv) {
     scanarg(*(argv + i));
   }
 
-  for (int i = 0; i < (height - lines) / 2; i++)
-    std::cout << '\n';
+  if (height > lines)
+    for (int i = 0; i < (height - lines) / 2; i++)
+      std::cout << '\n';
   spacer(width);
 
   if (width > max_length) {
@@ -70,8 +71,10 @@ int main(int argc, char **argv) {
     }
   }
 
-  for (int i = 2; i < (height - lines) / 2; i++)
-    std::cout << '\n';
+  if (height > lines)
+    for (int i = 2; i < (height - lines) / 2; i++)
+      std::cout << '\n';
 
+  std::cout << '\n';
   return EXIT_SUCCESS;
 }
