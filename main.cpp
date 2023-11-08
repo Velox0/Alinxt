@@ -4,12 +4,15 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-unsigned int max_length = 0;
-unsigned int lines = 1;
+static unsigned int max_length = 0;
+static unsigned short width = 0;
+static unsigned int lines = 1;
+static const bool isttyl = isatty(STDOUT_FILENO);
 
 /*
     Accepts pointer to a string.
     Iterates through the string letter character by character.
+    Calculates maximum line length.
     Until encounters '\0'.
 */
 void scanarg(const char *str) {
@@ -18,6 +21,8 @@ void scanarg(const char *str) {
     // count non-new-line characters
     if (*(str + i) != '\n')
       str_length++;
+
+    // count new-lines
     else if (str_length > max_length) {
       lines++;
       max_length = str_length;
@@ -32,9 +37,21 @@ void scanarg(const char *str) {
     max_length = str_length;
 }
 
-void spacer(int width) {
+void spacer() {
+  if (!isttyl || width < max_length)
+    return;
   for (int spacer = 0; spacer < (width - max_length) / 2; spacer++)
     std::cout << " ";
+}
+
+void display(const char *str) {
+  for (int j = 0; str[j] != '\0'; j++) {
+    std::cout << str[j];
+    if (str[j] == '\n')
+      spacer();
+  }
+  std::cout << std::endl;
+  spacer();
 }
 
 int main(int argc, char **argv) {
@@ -47,34 +64,28 @@ int main(int argc, char **argv) {
   struct winsize w;
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
   unsigned short height = w.ws_row;
-  unsigned short width = w.ws_col;
+  width = w.ws_col;
 
   // Iterate through all arguments.
   for (int i = 1; i < argc; i++) {
     scanarg(*(argv + i));
   }
 
-  if (height > lines)
+  // Vertical padding
+  if (height > lines && isttyl)
     for (int i = 0; i < (height - lines) / 2; i++)
-      std::cout << '\n';
-  spacer(width);
+      std::cout << "\n";
+  spacer();
 
-  if (width > max_length) {
-    for (int i = 1; i < argc; i++) {
-      for (int j = 0; *(*(argv + i) + j) != '\0'; j++) {
-        std::cout << *(*(argv + i) + j);
-        if (*(*(argv + i) + j) == '\n')
-          spacer(width);
-      }
-      std::cout << std::endl;
-      spacer(width);
-    }
+  for (int i = 1; i < argc; i++) {
+    display(argv[i]);
   }
 
-  if (height > lines)
+  // Vertical padding
+  if (height > lines && isttyl)
     for (int i = 2; i < (height - lines) / 2; i++)
-      std::cout << '\n';
+      std::cout << "\n";
 
-  std::cout << '\n';
+  std::cout << "\n";
   return EXIT_SUCCESS;
 }
