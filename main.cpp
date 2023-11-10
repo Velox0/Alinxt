@@ -7,13 +7,12 @@
 static unsigned int max_length = 0;
 static unsigned short width = 0;
 static unsigned int lines = 1;
-static const bool isttyl = isatty(STDOUT_FILENO);
+static const bool is_ttyl = isatty(STDOUT_FILENO);
 
 /*
-    Accepts pointer to a string.
-    Iterates through the string letter character by character.
-    Calculates maximum line length.
-    Until encounters '\0'.
+  Accepts pointer to a string.
+  Iterates through the string character by character.
+  Calculates maximum line length.
 */
 void scanarg(const char *str) {
   unsigned int str_length = 0;
@@ -38,7 +37,7 @@ void scanarg(const char *str) {
 }
 
 void spacer() {
-  if (!isttyl || width < max_length)
+  if (!is_ttyl || width < max_length)
     return;
   for (int spacer = 0; spacer < (width - max_length) / 2; spacer++)
     std::cout << " ";
@@ -55,8 +54,10 @@ void display(const char *str) {
 }
 
 int main(int argc, char **argv) {
-  if (argc == 1)
+  if (argc == 1) {
+    std::cerr << "\033[31mError:\033[0m No arguments passed." << std::endl;
     return EXIT_FAILURE;
+  }
 
   lines += argc - 2;
 
@@ -71,8 +72,8 @@ int main(int argc, char **argv) {
     scanarg(*(argv + i));
   }
 
-  // Vertical padding
-  if (height > lines && isttyl)
+  // Top vertical padding
+  if (height > lines && is_ttyl)
     for (int i = 0; i < (height - lines) / 2; i++)
       std::cout << "\n";
   spacer();
@@ -81,8 +82,8 @@ int main(int argc, char **argv) {
     display(argv[i]);
   }
 
-  // Vertical padding
-  if (height > lines && isttyl)
+  // Bottom vertical padding
+  if (height > lines && is_ttyl)
     for (int i = 2; i < (height - lines) / 2; i++)
       std::cout << "\n";
 
