@@ -35,7 +35,9 @@ int main(int argc, char **argv) {
 
   // Iterate through all arguments.
   for (int i = 1; i < argc; i++) {
-    scanarg(*(argv + i));
+    if (argv[i][0] != '-') {
+      scanarg(argv[i]);
+    }
   }
 
   // Top vertical padding
