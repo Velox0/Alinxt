@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <iostream>
-#include <stdio.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 
@@ -25,7 +24,7 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
-  lines += argc - 2;
+  lines = 1;
 
   // Get terminal dimensions
   struct winsize w;
@@ -37,6 +36,7 @@ int main(int argc, char **argv) {
   for (int i = 1; i < argc; i++) {
     if (argv[i][0] != '-') {
       scanarg(argv[i]);
+      lines++;
     }
   }
 
@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 
   // Bottom vertical padding
   if (height > lines && is_ttyl)
-    for (int i = 2; i < (height - lines) / 2; i++)
+    for (int i = 0; i < (height - lines) / 2; i++)
       std::cout << "\n";
 
   std::cout << "\n";
