@@ -38,7 +38,8 @@ int main(int argc, char **argv) {
   spacer();
 
   for (int i = 1; i < argc; i++) {
-    display(argv[i]);
+    if (argv[i][0] != '-')
+      display(argv[i]);
   }
 
   // Bottom vertical padding
