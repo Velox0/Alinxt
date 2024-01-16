@@ -9,18 +9,17 @@ extern const bool is_ttyl;
   Iterates through the string character by character.
   Calculates maximum line length.
 */
-
 void scanarg(const char *str);
 
 /*
   adds horizontal space from left
 */
-void spacer();
+inline void spacer();
 
 /*
   display string
 */
-void display(const char *str);
+inline void display(const char *str);
 
 void scanarg(const char *str) {
   unsigned int str_length = 0;
@@ -44,14 +43,14 @@ void scanarg(const char *str) {
     max_length = str_length;
 }
 
-void spacer() {
+inline void spacer() {
   if (!is_ttyl || width < max_length)
     return;
   for (int spacer = 0; spacer < (width - max_length) / 2; spacer++)
     std::cout << " ";
 }
 
-void display(const char *str) {
+inline void display(const char *str) {
   for (int j = 0; str[j] != '\0'; j++) {
     std::cout << str[j];
     if (str[j] == '\n')
