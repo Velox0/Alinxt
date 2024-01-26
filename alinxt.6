@@ -1,0 +1,46 @@
+.TH ALINXT 6 "26 Jan 2024" "v0.2.0-beta" "Games Manual"
+
+.SH NAME
+alinxt - manipulate text on terminal
+
+.SH DESCRIPTION
+.B ALINXT
+aligns text on terminal screen. Currently only supports centering
+the text to the terminal.
+
+.SH USAGE
+Similar to echo, type anything after alinxt to echo it back centered
+to terminal screen by default. Use options to customize the output.
+
+.SH OPTIONS
+-h, --help             	print help message
+.br
+-s, --stdin            	input from standard input
+.br
+-v, --vertical-only    	only center vertically
+.br
+-h, --horizontal-only  	only center horizontally
+.br
+-t, --trim-top    <num>	remove blank new-lines from top
+.br
+-b, --trim-bottom <num>	remove blank new-lines from bottom
+.br
+-H, --height      <num>	explicitly set tty height
+.br
+-W, --width       <num>	explicitly set tty width
+.br
+-L, --linewidth   <num>	explicitly set max-line length
+.br
+-V, --version          	get program version info
+
+.SH EXAMPLE
+alinxt "$(figlet Cool Text)"
+
+.SH SEE ALSO
+cat(1), figlet(6)
+
+.SH BUGS
+No known bugs.
+
+.SH AUTHOR
+Velox0
