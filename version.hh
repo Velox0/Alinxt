@@ -1,1 +1,1 @@
-#define ALINXTVERSION "v0.2-beta"
+#define ALINXTVERSION "v0.2.1-beta"

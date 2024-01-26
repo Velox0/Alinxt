@@ -36,26 +36,29 @@ int main(int argc, char **argv) {
       continue;
     }
     char ch = getoption(argv[i]);
-    switch (ch) {
-    case 's':
-    case 'v':
-    case 'o':
-    case 'H':
-    case 'W':
-    case 'L':
-      std::cout << "[" << ch << "] to be implemented";
-      break;
-    case 'V':
-      std::cout << "Alinxt " << ALINXTVERSION << std::endl;
-      exit(EXIT_SUCCESS);
-    case 'h':
-    case '?':
-      help(argv[0]);
-      exit(EXIT_SUCCESS);
-    default:
-      help(argv[0]);
-      exit(EXIT_FAILURE);
-    }
+    int j = 1; // to iterate over combined short options
+    do {
+      switch (ch) {
+      case 's':
+      case 'v':
+      case 'o':
+      case 'H':
+      case 'W':
+      case 'L':
+        std::cout << "[" << ch << "] to be implemented";
+        break;
+      case 'V':
+        std::cout << "Alinxt " << ALINXTVERSION << std::endl;
+        exit(EXIT_SUCCESS);
+      case 'h':
+      case '?':
+        help(argv[0]);
+        exit(EXIT_SUCCESS);
+      default:
+        help(argv[0]);
+        exit(EXIT_FAILURE);
+      }
+    } while (argv[i][1] != '-' && (ch = argv[i][++j]) != '\0');
   }
 
   // Iterate through all arguments.

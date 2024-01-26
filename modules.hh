@@ -101,15 +101,15 @@ void help(char arg[]) {
   std::cout << "Usage: " << arg << " [OPTION]"
             << " text" << std::endl
             << std::endl;
-  std::cout << "  -h --help             \tprint this help message\n"
-            << "  -s --stdin            \tinput from standard input\n"
-            << "  -v --vertical-only    \tonly center vertically\n"
-            << "  -o --horizontal-only  \tonly center horizontally\n"
-            << "  -t --trim-top    [num]\tremove blank new-lines from top\n"
-            << "  -b --trim-bottom [num]\tremove blank new-lines from bottom\n"
-            << "  -H --height      [num]\texplicitly set tty height\n"
-            << "  -W --width       [num]\texplicitly set tty width\n"
-            << "  -L --linewidth   [num]\texplicitly set max-line length\n"
-            << "  -V --version          \tget program version info\n"
+  std::cout << "  -h, --help             \tprint this help message\n"
+            << "  -s, --stdin            \tinput from standard input\n"
+            << "  -v, --vertical-only    \tonly center vertically\n"
+            << "  -o, --horizontal-only  \tonly center horizontally\n"
+            << "  -t, --trim-top    <num>\tremove blank new-lines from top\n"
+            << "  -b, --trim-bottom <num>\tremove blank new-lines from bottom\n"
+            << "  -H, --height      <num>\texplicitly set tty height\n"
+            << "  -W, --width       <num>\texplicitly set tty width\n"
+            << "  -L, --linewidth   <num>\texplicitly set max-line length\n"
+            << "  -V, --version          \tget program version info\n"
             << std::endl;
 }
