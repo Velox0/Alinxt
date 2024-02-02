@@ -40,10 +40,26 @@ int main(int argc, char **argv) {
     do {
       switch (ch) {
       case 's':
+        // stdin
+        break;
       case 'v':
+        width = 0;
+        break;
       case 'o':
+        height = 0;
+        break;
+      case 't':
+        // trim top
+        break;
+      case 'b':
+        // trim bottom
+        break;
       case 'H':
+        // tty height
+        break;
       case 'W':
+        // tty width
+        break;
       case 'L':
         std::cout << "[" << ch << "] to be implemented";
         break;
