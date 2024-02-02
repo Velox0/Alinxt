@@ -16,6 +16,8 @@ alinxt "$(figlet Cool Text)"
 
 ## Installation
 
+From GitHub:
+
 ```bash
 chmod +x ./install.sh
 ./install.sh
