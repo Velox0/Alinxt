@@ -43,17 +43,23 @@ int main(int argc, char **argv) {
         // stdin
         break;
       case 'v':
-        // vertical only
+        width = 0;
+        break;
       case 'o':
-        // horizontal only
+        height = 0;
+        break;
       case 't':
         // trim top
+        break;
       case 'b':
-      // trim bottom
+        // trim bottom
+        break;
       case 'H':
-      // tty height
+        // tty height
+        break;
       case 'W':
-      // tty width
+        // tty width
+        break;
       case 'L':
         std::cout << "[" << ch << "] to be implemented";
         break;
