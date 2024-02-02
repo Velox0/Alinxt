@@ -19,6 +19,8 @@ alinxt "$(figlet Cool Text)"
 From GitHub:
 
 ```bash
+git clone https://github.com/Velox0/Alinxt alinxt
+cd alinxt
 chmod +x ./install.sh
 ./install.sh
 ```
