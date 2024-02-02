@@ -10,4 +10,9 @@ sudo g++ -O3 /tmp/alinxt/main.cpp -o /usr/bin/alinxt
 gzip -f      /tmp/alinxt/alinxt.6
 
 manpath="/usr/share/man/man6/"
+if [ ! -d "$manpath" ]; then
+  # Create the path
+  sudo mkdir -p "$manpath"
+fi
+
 sudo mv /tmp/alinxt/alinxt.6.* $manpath
