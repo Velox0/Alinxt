@@ -7,6 +7,11 @@ extern unsigned short width;
 extern unsigned int lines;
 extern const bool is_ttyl;
 
+struct error {
+  enum type { BAD_OPTION, NO_VALUE, INVALID_VALUE };
+  char option;
+} err;
+
 /*!
  * @function    scanarg
  * @abstract    calculates newlines and max line length

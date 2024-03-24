@@ -29,6 +29,7 @@ int main(int argc, char **argv) {
   // index of arguments to display (not flags)
   int *display_args = (int *)malloc(sizeof(int) * argc);
 
+  int trim_top = 0, trim_bottom = 0;
   for (int i = 1; i < argc; i++) {
     if (argv[i][0] != '-') {
       *display_args += 1;
@@ -49,10 +50,20 @@ int main(int argc, char **argv) {
         height = 0;
         break;
       case 't':
-        // trim top
+        if (++i < argc)
+          trim_top = atoi(argv[i]);
+        else {
+          help(argv[0]);
+          exit(1);
+        }
         break;
       case 'b':
-        // trim bottom
+        if (++i < argc)
+          trim_bottom = atoi(argv[i]);
+        else {
+          help(argv[0]);
+          exit(1);
+        }
         break;
       case 'H':
         // tty height
@@ -87,7 +98,7 @@ int main(int argc, char **argv) {
 
   // Top vertical padding
   if (height > lines && is_ttyl)
-    for (int i = 0; i < (height - lines) / 2; i++)
+    for (int i = trim_top; i < (height - lines) / 2; i++)
       std::cout << "\n";
   spacer();
 
@@ -98,7 +109,7 @@ int main(int argc, char **argv) {
 
   // Bottom vertical padding
   if (height > lines && is_ttyl)
-    for (int i = 0; i < (height - lines) / 2; i++)
+    for (int i = trim_bottom; i < (height - lines) / 2; i++)
       std::cout << "\n";
 
   std::cout << "\n";
